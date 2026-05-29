@@ -1,58 +1,340 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel HR Systeem
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Overzicht
 
-## About Laravel
+Dit project dient als aantoning van mijn PHP, Laravel en Docker vaardigheden als onderbouwing bij het internship-interview proces bij Moonly Software.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Het doel van dit project is het aantonen van kennis en vaardigheden binnen Laravel, waaronder:
 
-## Learning Laravel
+* Authenticatie en autorisatie
+* Eloquent ORM
+* Database migrations
+* Factories en seeders
+* Form Requests
+* CRUD-functionaliteit
+* Role Based Access Control (RBAC)
+* Filtering en paginatie
+* Docker deployment
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+\---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Gebruikte technologieën
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+* Laravel 13
+* PHP 8.5
+* SQLite
+* Laravel Breeze
+* Tailwind CSS
+* Docker
+* GitHub
 
-## Agentic Development
+\---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+# Rollen
+
+Het systeem ondersteunt drie rollen:
+
+## Administrator
+
+Kan:
+
+* Alle medewerkers bekijken
+* Medewerkers toevoegen
+* Medewerkers aanpassen
+* Medewerkers verwijderen
+* Salarissen bekijken
+* Wachtwoorden van andere gebruikers wijzigen
+* Alle verlofaanvragen bekijken
+* Verlofaanvragen goedkeuren of afwijzen
+* Alle aanwezigheidsregistraties bekijken
+* Aanwezigheidsregistraties aanmaken
+* Alle salarisgegevens bekijken
+* Salarisgegevens aanmaken
+
+\---
+
+## HR Manager
+
+Kan:
+
+* Alle medewerkers bekijken
+* Medewerkers toevoegen
+* Medewerkers aanpassen
+* Medewerkers verwijderen
+* Salarissen bekijken
+* Alle verlofaanvragen bekijken
+* Verlofaanvragen goedkeuren of afwijzen
+* Alle aanwezigheidsregistraties bekijken
+* Aanwezigheidsregistraties aanmaken
+* Alle salarisgegevens bekijken
+* Salarisgegevens aanmaken
+
+Kan niet:
+
+* Wachtwoorden van andere gebruikers wijzigen
+
+\---
+
+## Employee
+
+Kan:
+
+* Eigen dashboard bekijken
+* Actieve collega's bekijken
+* Medewerkers filteren
+* Eigen verlofaanvragen bekijken
+* Eigen verlofaanvragen indienen
+* Eigen verlofaanvragen annuleren
+* Eigen aanwezigheidsregistraties bekijken
+* Eigen salarisgegevens bekijken
+
+Kan niet:
+
+* Salarissen van collega's bekijken
+* Inactieve medewerkers bekijken
+* Medewerkers beheren
+* Verlofaanvragen goedkeuren
+* Aanwezigheid registreren
+* Salarisgegevens beheren
+
+\---
+
+# Functionaliteiten
+
+## Dashboard
+
+### Administrator / HR
+
+Toont:
+
+* Totaal aantal medewerkers
+* Actieve medewerkers
+* Medewerkers met verlof
+* Aantal afdelingen
+
+### Employee
+
+Toont:
+
+* Aantal eigen verlofaanvragen
+* Openstaande verlofaanvragen
+* Eigen aanwezigheidsregistraties
+* Eigen salarisregistraties
+
+\---
+
+# Medewerkersbeheer
+
+Ondersteunde functionaliteiten:
+
+* Medewerker toevoegen
+* Medewerker bekijken
+* Medewerker aanpassen
+* Medewerker verwijderen
+* Zoeken op naam
+* Filteren op afdeling
+* Filteren op status
+* Paginatie
+
+\---
+
+# Verlofaanvragen
+
+Ondersteunde statussen:
+
+* Pending
+* Approved
+* Rejected
+* Cancelled
+* Expired
+
+Functionaliteiten:
+
+* Verlof aanvragen
+* Verlof annuleren
+* Goedkeuren
+* Afwijzen
+* Automatische vervaldatum (Expired)
+* Filteren op medewerker
+* Filteren op startdatum
+* Filteren op status
+
+Business rules:
+
+* Verlof moet minimaal 14 dagen vooraf worden aangevraagd
+* Verlopen aanvragen krijgen automatisch de status Expired
+
+\---
+
+# Aanwezigheidsregistratie
+
+Functionaliteiten:
+
+* Registratie bekijken
+* Filteren op medewerker
+* Filteren op datum
+
+Business logic:
+
+* Gewerkte uren worden automatisch berekend
+* Alleen eigen registraties zichtbaar voor medewerkers
+
+\---
+
+# Salarisadministratie
+
+Functionaliteiten:
+
+* Salarisoverzicht bekijken
+* Salarisrecord aanmaken
+* Netto salaris berekenen
+
+Formule:
+
+Netto salaris = Basissalaris + Bonus - Inhoudingen
+
+Filtermogelijkheden:
+
+* Eigen salarisoverzicht voor medewerkers
+* Volledig overzicht voor HR en Administrators
+
+\---
+
+# Database
+
+Belangrijkste entiteiten:
+
+## User
+
+Authenticatiegegevens en rol.
+
+## Employee
+
+Koppelt gebruikers aan HR-gerelateerde gegevens.
+
+## Department
+
+Afdelingen binnen de organisatie.
+
+## Position
+
+Functies inclusief basissalaris.
+
+## LeaveRequest
+
+Verlofaanvragen.
+
+## AttendanceRecord
+
+Aanwezigheidsregistraties.
+
+## PayrollRecord
+
+Salarisgegevens.
+
+\---
+
+# Laravel Functionaliteiten
+
+Binnen dit project zijn onder andere de volgende Laravel componenten gebruikt:
+
+## Eloquent Relationships
+
+* hasOne
+* belongsTo
+* hasMany
+
+## Form Requests
+
+Voor validatie van invoer:
+
+* StoreEmployeeRequest
+* UpdateEmployeeRequest
+* StoreLeaveRequest
+* StoreAttendanceRecordRequest
+* enzovoort
+
+## Factories
+
+Voor het genereren van testdata.
+
+## Seeders
+
+Voor het vullen van de database met realistische voorbeeldgegevens.
+
+## Middleware
+
+Voor authenticatie.
+
+## Role Based Access Control
+
+Via rollen:
+
+* admin
+* hr\_manager
+* employee
+
+## Pagination
+
+Laravel paginator wordt gebruikt voor overzichtelijke tabellen.
+
+## Filtering
+
+Zoeken en filteren op meerdere pagina's.
+
+\---
+
+# Realistische Testdata
+
+De database wordt gevuld met:
+
+* Afdelingen
+* Functies
+* Medewerkers
+* Verlofaanvragen
+* Aanwezigheidsregistraties
+* Salarisgegevens
+
+De seeders houden rekening met:
+
+* Verlofstatussen
+* Salarissen gebaseerd op functie
+* Historische salarisgegevens
+* Relaties tussen medewerkers en afdelingen
+
+\---
+
+# Docker
+
+Image bouwen:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+docker build -t laravel-hr-system .
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Container starten:
 
-## Contributing
+```bash
+docker run -p 8000:8000 laravel-hr-system
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+\---
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+Er is een seeder aanwezig:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan migrate:fresh --seed
+```
 
-## License
+Of gebruik de default user:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Email: admin@moonly.com
+
+PW: Armstrong69
+
+
+
