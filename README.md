@@ -330,6 +330,10 @@ Er is een seeder aanwezig:
 php artisan migrate:fresh --seed
 ```
 
+
+
+App available op localhost:8000
+
 Of gebruik de default user:
 
 Email: admin@moonly.com

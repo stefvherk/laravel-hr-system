@@ -21,12 +21,10 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 RUN npm install && npm run build
 
-RUN cp .env.example .env
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
-RUN php artisan key:generate
-
-RUN touch database/database.sqlite
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 8000
 
-CMD php artisan serve --host=0.0.0.0 --port=8000
+CMD ["docker-entrypoint.sh"]
