@@ -87,6 +87,7 @@ Kan:
 * Eigen verlofaanvragen bekijken
 * Eigen verlofaanvragen indienen
 * Eigen verlofaanvragen annuleren
+* Eigen verlofaanvragen filteren
 * Eigen aanwezigheidsregistraties bekijken
 * Eigen salarisgegevens bekijken
 
@@ -136,6 +137,8 @@ Ondersteunde functionaliteiten:
 * Zoeken op naam
 * Filteren op afdeling
 * Filteren op status
+* Rolbeheer (Administrator)
+* Bescherming tegen verwijderen van laatste Administrator
 * Paginatie
 
 \---
@@ -160,6 +163,8 @@ Functionaliteiten:
 * Filteren op medewerker
 * Filteren op startdatum
 * Filteren op status
+* Employees kunnen alleen toekomstige verlofaanvragen indienen
+(minimaal 14 dagen vooruit)
 
 Business rules:
 
@@ -307,16 +312,16 @@ De seeders houden rekening met:
 \---
 
 # Docker
+Applicatie beschikbaar op:
 
-Image bouwen:
-
-```bash
-docker build -t laravel-hr-system .
+```text
+http://localhost:8000
 ```
 
-Container starten:
+Standalone image importeren:
 
 ```bash
+docker load -i laravel-hr-system.tar
 docker run -p 8000:8000 laravel-hr-system
 ```
 
@@ -340,5 +345,4 @@ Email: admin@moonly.com
 
 PW: Armstrong69
 
-
-
+Of verander zelf in .env

@@ -4,13 +4,42 @@
             <div class="bg-white shadow rounded-lg p-6">
 
                 <h1 class="text-2xl font-bold mb-6">Add Employee</h1>
-
+                @if(session('error'))
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <form method="POST" 
                     action="{{ route('employees.update', $employee) }}">
 
                     @csrf
                     @method('PUT')
 
+                    @if(auth()->user()->isAdmin())
+                        <div class="mb-4">
+                            <label class="block mb-1">Role</label>
+
+                            <select name="role" class="w-full border rounded p-2 pr-10">
+                                <option value="employee" @selected(old('role', $employee->user->role ?? 'employee') === 'employee')>
+                                    Employee
+                                </option>
+
+                                <option value="hr_manager" @selected(old('role', $employee->user->role ?? 'employee') === 'hr_manager')>
+                                    HR Manager
+                                </option>
+
+                                <option value="admin" @selected(old('role', $employee->user->role ?? 'employee') === 'admin')>
+                                    Admin
+                                </option>
+                            </select>
+
+                            @error('role')
+                                <p class="text-red-600 text-sm">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    @else
+                        <input type="hidden" name="role" value="{{ old('role', $employee->user->role ?? 'employee') }}">
+                    @endif
                     <div class="mb-4">
                         <label class="block mb-1">Name</label>
                         <input type="text" name="name" value="{{ old('name', $employee->user->name) }}" class="w-full border rounded p-2">

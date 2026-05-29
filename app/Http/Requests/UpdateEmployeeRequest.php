@@ -40,7 +40,9 @@ class UpdateEmployeeRequest extends FormRequest
             'employment_status' => [
                 'required',
                 'in:active,inactive,on_leave'
-            ]
+            ],
+
+            'role' => ['required', 'in:employee,hr_manager,admin'],
         ];
     }
 }

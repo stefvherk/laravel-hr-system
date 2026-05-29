@@ -29,6 +29,7 @@ class StoreEmployeeRequest extends FormRequest
             'position_id' => ['required', 'exists:positions,id'],
             'hire_date' => ['required', 'date'],
             'employment_status' => ['required', 'in:active,inactive,on_leave'],
+            'role' => ['required', 'in:employee,hr_manager,admin'],
         ];
     }
 }

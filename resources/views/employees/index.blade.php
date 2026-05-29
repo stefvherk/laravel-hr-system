@@ -31,6 +31,12 @@
                 
                 @endif
 
+                @if(session('error'))
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 <form method="GET"
                     action="{{ route('employees.index') }}"
                     class="mb-6 flex flex-wrap gap-4 items-center">

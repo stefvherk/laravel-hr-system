@@ -91,7 +91,9 @@ class EmployeeController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make('password'),
-        ]);
+            'role' => auth()->user()->isAdmin()
+                ? $request->role
+                : 'employee',        ]);
 
         Employee::create([
             'user_id' => $user->id,
@@ -151,10 +153,24 @@ class EmployeeController extends Controller
             || auth()->user()->isHrManager(),
             403
         );
+
+        $newRole = auth()->user()->isAdmin()
+            ? $request->role
+            : $employee->user->role;
+
+        if (
+            $employee->user->isAdmin()
+            && $newRole !== 'admin'
+            && User::where('role', 'admin')->count() <= 1
+        ) {
+            return redirect()
+                ->route('employees.edit', $employee)
+                ->with('error', 'The last admin cannot be demoted.');
+        }
         $employee->user->update([
             'name' => $request->name,
             'email' => $request->email,
-        ]);
+            'role' => $newRole,        ]);
 
         $employee->update([
             'department_id' => $request->department_id,
@@ -178,6 +194,15 @@ class EmployeeController extends Controller
             || auth()->user()->isHrManager(),
             403
         );
+
+        if (
+            $employee->user->isAdmin()
+            && User::where('role', 'admin')->count() <= 1
+        ) {
+            return redirect()
+                ->route('employees.index')
+                ->with('error', 'The last admin cannot be deleted.');
+        }
         $employee->user->delete();
 
         return redirect()

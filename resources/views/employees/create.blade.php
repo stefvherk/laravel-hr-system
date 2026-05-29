@@ -8,6 +8,24 @@
                 <form method="POST" action="{{ route('employees.store') }}">
                     @csrf
 
+                    @if(auth()->user()->isAdmin())
+                        <div class="mb-4">
+                            <label class="block mb-1">Role</label>
+
+                            <select name="role" class="w-full border rounded p-2 pr-10">
+                                <option value="employee" @selected(old('role', 'employee') === 'employee')>Employee</option>
+                                <option value="hr_manager" @selected(old('role') === 'hr_manager')>HR Manager</option>
+                                <option value="admin" @selected(old('role') === 'admin')>Admin</option>
+                            </select>
+
+                            @error('role')
+                                <p class="text-red-600 text-sm">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    @else
+                        <input type="hidden" name="role" value="employee">
+                    @endif
+
                     <div class="mb-4">
                         <label class="block mb-1">Name</label>
                         <input type="text" name="name" value="{{ old('name') }}" class="w-full border rounded p-2">
